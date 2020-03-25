@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: solopov <solopov@student.42.fr>            +#+  +:+       +#+         #
+#    By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/24 13:21:16 by solopov           #+#    #+#              #
-#    Updated: 2020/03/24 13:27:24 by solopov          ###   ########.fr        #
+#    Created: 2020/03/24 13:21:16 by asolopov          #+#    #+#              #
+#    Updated: 2020/03/25 10:40:03 by asolopov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,24 @@ RED			=	\033[0;31m
 
 NAME				= asolopov.filler
 
-FILLER_SRCS			= main.c
+FILLER_SRCS			= main.c\
+					get_map.c\
+					err_exit.c
 
 FILLER_FILES		= $(addprefix $(FILLER_DIR), $(FILLER_SRCS))
 
+# VISU files
+
+VISU_NAME			= visu
+
+VISU_SRCS			= main.c
+
+VISU_FILES			= $(addprefix $(VISU_DIR), $(VISU_SRCS))
+
 # Directories
 
-FILLER_DIR			= ./srcs/
+FILLER_DIR			= ./srcs/filler/
+VISU_DIR			= ./srcs/visu/
 LIBFT_DIR			= ./libs/libft/
 LIB_MLX_DIR			= ./libs/libmlx
 
@@ -41,16 +52,22 @@ LIBFT_A				= $(addprefix $(LIBFT_DIR), $(LIBFT_NAME))
 LIBMLXFLAGS			= -I$(LIB_MLX_DIR) -L$(LIB_MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 
 # Includes
-INCLUDES			= includes
+INCLUDES_FILLER		= includes/filler.h
+INCLUDES_VISU		= includes/visu.h
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_NAME)
+$(NAME): $(VISU_NAME)
 	@echo "$(RED)Compiling filler...$(RES)"
-	@gcc -o $(NAME) $(CFLAGS) -I $(INCLUDES) $(FILLER_FILES) $(LIBFT_A)
+	@gcc -o $(NAME) $(CFLAGS) -I $(INCLUDES_FILLER) $(FILLER_FILES) $(LIBFT_A)
 	@echo "$(GREENB)$(NAME) $(GREEN)done.$(RES)"
+
+$(VISU_NAME): $(LIBFT_NAME)
+	@echo "$(RED)Compiling visu...$(RES)"
+	@gcc -o $(VISU_NAME) $(CFLAGS) -I $(INCLUDES_VISU) $(VISU_FILES) $(LIBFT_A) $(LIBMLXFLAGS)
+	@echo "$(GREENB)$(VISU_NAME) $(GREEN)done.$(RES)"
 
 $(LIBFT_NAME):
 	@echo "$(RED)Compiling Libft Library$(RES)"
@@ -69,6 +86,7 @@ clean:
 fclean: clean
 	@echo "$(RED)Removing Executable & Library...$(RES)"
 	@/bin/rm -f $(NAME)
+	@/bin/rm -f $(VISU_NAME)
 	@Make fclean -C $(LIBFT_DIR)
 	@Make fclean -C $(LIB_MLX_DIR)
 	@echo "$(GREEN)Done.$(RES)"
