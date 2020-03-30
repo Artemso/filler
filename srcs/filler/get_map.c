@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/30 12:39:45 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/30 15:10:52 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,35 @@
 
 static void	print_input_data(t_prop *xt)
 {
-	int cnt;
+	int cntx;
+	int	cnty;
 
-	cnt = 0;
+	cntx = 0;
 	printf("CHARS:		P1 chars: %c | P2 chars: %c\n", xt->me, xt->enemy);
 	printf("BOARD SIZE:	x: %d | y: %d\n", xt->brd_x, xt->brd_y);
 	printf("MAP STRINGS:\n");
-	while (xt->map[cnt])
+	while (xt->map[cntx])
 	{
-		if (xt->map[cnt])
-			printf("%s\n", xt->map[cnt]);
-		cnt += 1;
+		if (xt->map[cntx])
+			printf("%s\n", xt->map[cntx]);
+		cntx += 1;
 	}
+	printf("\n");
+	printf("PIECE SIZE:	x: %d | y: %d\n", xt->pc_x, xt->pc_y);
+	printf("PIECE INT:\n");
+	cntx = 0;
+	while (cntx < xt->pc_x)
+	{
+		cnty = 0;
+		while (cnty < xt->pc_y)
+		{
+			printf("%d ", xt->piece[cntx][cnty]);
+			cnty += 1;
+		}
+		printf("\n");
+		cntx += 1;
+	}
+	printf("\n");
 }
 
 static int	is_map(char *line)
@@ -58,6 +75,28 @@ static void	append_to_map(t_prop *xt, char *line)
 	xt->mapcnt += 1;
 }
 
+static void	append_to_piece(t_prop *xt, char *line)
+{
+	int cnt;
+
+	cnt = 0;
+	if (!(xt->piece))
+	{
+		xt->piece = (int **)malloc(xt->pc_x * sizeof(int *));
+		xt->pc_cnt = 0;
+	}
+	xt->piece[xt->pc_cnt] = (int *)malloc(xt->pc_y * sizeof(int));
+	while (line[cnt] != '\0')
+	{
+		if (line[cnt] == '.')
+			xt->piece[xt->pc_cnt][cnt] = 0;
+		else if (line[cnt] == '*')
+			xt->piece[xt->pc_cnt][cnt] = 1;
+		cnt += 1;
+	}
+	xt->pc_cnt += 1;
+}
+
 void		get_map(t_prop *xt)
 {
 	char *line;
@@ -83,9 +122,19 @@ void		get_map(t_prop *xt)
 			temp = ft_strsplit(line, ' ');
 			xt->brd_x = ft_atoi(temp[1]);
 			xt->brd_y = ft_atoi(temp[2]);
+			free(temp); // mod it later pls
 		}
 		else if (is_map(line))
 			append_to_map(xt, line);
+		else if (ft_strstr(line, "Piece"))
+		{
+			temp = ft_strsplit(line, ' ');
+			 xt->pc_x = ft_atoi(temp[1]);
+			 xt->pc_y = ft_atoi(temp[2]);
+			 free(temp); // mod it later pls
+		}
+		else if (ft_strlen(line) == xt->pc_y)
+			append_to_piece(xt, line);
 	}
 	print_input_data(xt);
 }

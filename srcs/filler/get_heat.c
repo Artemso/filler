@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:28:32 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/30 13:30:23 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/30 14:38:57 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static void	fill_heat(t_prop *xt)
 	int cnty;
 	int cntj;
 	int cnti;
-	int	mindist;
 
 	cntx = 0;
 	cnti = 0;
@@ -117,6 +116,7 @@ static void	fill_heat(t_prop *xt)
 void		get_heat(t_prop *xt)
 {
 	xt->heat = map_to_heat(xt);
+	print_heat_data(xt);
 	fill_heat(xt);
 	print_heat_data(xt);
 }

@@ -6,7 +6,7 @@
 #    By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/24 13:21:16 by asolopov          #+#    #+#              #
-#    Updated: 2020/03/30 12:28:43 by asolopov         ###   ########.fr        #
+#    Updated: 2020/03/30 17:52:01 by asolopov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ NAME				= asolopov.filler
 FILLER_SRCS			= main.c\
 					get_map.c\
 					get_heat.c\
+					place_piece.c\
 					err_exit.c
 
 FILLER_FILES		= $(addprefix $(FILLER_DIR), $(FILLER_SRCS))
