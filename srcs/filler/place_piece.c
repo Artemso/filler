@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:47:30 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 14:11:47 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 16:55:33 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,8 @@ void		get_place_coords(t_prop *xt)
 		x += 1;
 	}
 	// place_piece(xt, xt->place_x, xt->place_y);
-	printf("%d %d\n", xt->place_x, xt->place_y);
+	ft_putnbr(xt->place_x);
+	ft_putchar(' ');
+	ft_putnbr(xt->place_y);
+	ft_putchar('\n');
 }

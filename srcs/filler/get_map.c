@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 14:45:46 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 17:06:10 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,12 @@ void		get_map(t_prop *xt)
 		else if (ft_strlen(line) == xt->pc_y)
 		{
 			append_to_piece(xt, line);
-			cnt += 1;	
-			if (cnt == xt->pc_y)
-				break ;	
+			cnt += 1;
+			if (cnt == xt->pc_x)
+				{
+					get_heat(xt);
+					get_place_coords(xt);
+				}
 		}
 	}
 }
