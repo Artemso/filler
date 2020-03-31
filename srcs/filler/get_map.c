@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 17:06:10 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 18:26:58 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void		get_map(t_prop *xt)
 				{
 					get_heat(xt);
 					get_place_coords(xt);
+					cnt = 0;
 				}
 		}
 	}

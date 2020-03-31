@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 13:07:36 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 14:30:53 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 18:21:02 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct	s_prop
 {
 	char		me;
 	char		enemy;
+	char		melow;
+	char		enemylow;
 	
 	char		**map;
 	int			brd_x;

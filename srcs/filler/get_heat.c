@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:28:32 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 14:12:32 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 19:22:04 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static int	**map_to_heat(t_prop *xt)
 		{
 			if (xt->map[cntx][cnty] == '.')
 				new[cntx][cnty] = xt->brd_y + xt->brd_x;
-			else if (xt->map[cntx][cnty] == xt->enemy)
+			if (xt->map[cntx][cnty] == xt->enemy || xt->map[cntx][cnty] == 'x')
 				new[cntx][cnty] = 0;
-			else
+			if (xt->map[cntx][cnty] == xt->me || xt->map[cntx][cnty] == 'o')
 				new[cntx][cnty] = -1;
 			cnty += 1;
 		}
@@ -118,5 +118,5 @@ void		get_heat(t_prop *xt)
 	xt->heat = map_to_heat(xt);
 	//print_heat_data(xt);
 	fill_heat(xt);
-	//print_heat_data(xt);
+	print_heat_data(xt);
 }
