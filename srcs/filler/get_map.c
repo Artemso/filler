@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/30 15:10:52 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 14:12:12 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,5 @@ void		get_map(t_prop *xt)
 		else if (ft_strlen(line) == xt->pc_y)
 			append_to_piece(xt, line);
 	}
-	print_input_data(xt);
+	//print_input_data(xt);
 }
