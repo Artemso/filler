@@ -6,11 +6,17 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:37:54 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/29 13:33:53 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 14:31:24 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visu.h"
+
+void	err_exit(char *msg)
+{
+	perror(msg);
+	exit(0);
+}
 
 static void	init_visu(t_prop *xt)
 {

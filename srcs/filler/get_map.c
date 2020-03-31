@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 14:12:12 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 14:45:46 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ void		get_map(t_prop *xt)
 {
 	char *line;
 	char **temp;
-	
+	int cnt;
+
+	cnt = 0;
 	while(get_next_line(0, &line) > 0)
 	{
 		if (ft_strstr(line, "$$$ exec p1"))
@@ -129,12 +131,16 @@ void		get_map(t_prop *xt)
 		else if (ft_strstr(line, "Piece"))
 		{
 			temp = ft_strsplit(line, ' ');
-			 xt->pc_x = ft_atoi(temp[1]);
-			 xt->pc_y = ft_atoi(temp[2]);
-			 free(temp); // mod it later pls
+			xt->pc_x = ft_atoi(temp[1]);
+			xt->pc_y = ft_atoi(temp[2]);
+			free(temp); // mod it later pls
 		}
 		else if (ft_strlen(line) == xt->pc_y)
+		{
 			append_to_piece(xt, line);
+			cnt += 1;	
+			if (cnt == xt->pc_y)
+				break ;	
+		}
 	}
-	//print_input_data(xt);
 }
