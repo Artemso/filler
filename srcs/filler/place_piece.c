@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:47:30 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/01 16:18:03 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/01 16:28:48 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,8 @@ void		get_place_coords(t_prop *xt)
 	ft_putchar('\n');
 	xt->map = 0;
 	xt->piece = 0;
+<<<<<<< HEAD
 	xt->heat = 0;
+=======
+>>>>>>> 4ae7a28469fbde14750f92061ebfac610397fd23
 }
