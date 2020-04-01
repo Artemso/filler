@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:47:30 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 19:12:39 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/03/31 16:55:33 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,33 +112,6 @@ static int	get_overlap(t_prop *xt, int off_x, int off_y)
 		return (0);
 }
 
-void		delete_all(t_prop *xt)
-{
-	// int cnt;
-
-	// cnt = 0;
-	// while(xt->map[cnt] != 0)
-	// {
-	// 	free(xt->map[cnt]);
-	// 	cnt += 1;
-	// }
-	//free(xt->map);
-	// cnt = 0;
-	// while (xt->heat[cnt] != 0)
-	// {
-	// 	free(xt->heat[cnt]);
-	// 	cnt += 1;
-	// }
-	// free(xt->heat);
-	// cnt = 0;
-	// while (xt->piece[cnt] != 0)
-	// {
-	// 	free(xt->piece[cnt]);
-	// 	cnt += 1;
-	// }
-	// free(xt->piece);
-}
-
 void		get_place_coords(t_prop *xt)
 {
 	int x;
@@ -172,6 +145,4 @@ void		get_place_coords(t_prop *xt)
 	ft_putchar(' ');
 	ft_putnbr(xt->place_y);
 	ft_putchar('\n');
-	xt->map = 0;
-	xt->piece = 0;
 }
