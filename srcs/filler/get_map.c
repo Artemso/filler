@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/01 16:28:02 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/01 20:29:25 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	print_input_data(t_prop *xt)
 	int	cnty;
 
 	cntx = 0;
-	printf("CHARS:		P1 chars: %c | P2 chars: %c\n", xt->me, xt->enemy);
+	printf("CHARS:		P1 chars: %s | P2 chars: %s\n", xt->me, xt->enemy);
 	printf("BOARD SIZE:	x: %d | y: %d\n", xt->brd_x, xt->brd_y);
 	printf("MAP STRINGS:\n");
 	while (xt->map[cntx])
@@ -45,22 +45,49 @@ static void	print_input_data(t_prop *xt)
 	printf("\n");
 }
 
-static int	is_map(char *line)
+static int	is_piece(t_prop *xt, char *line)
 {
-	int cnt;
+	int		cnt;
+	char	*allowed;
 
 	cnt = 0;
-	if (line[3] == ' ')
+	allowed = ".*";
+	while (line[cnt] != '\0')
 	{
-		while (cnt < 3)
-		{
-			if (!ft_isdigit(line[cnt]))
-				return (0);
+		if (ft_strchr(allowed, line[cnt]))
 			cnt += 1;
-		}
-		return (1);
+		else
+			return 0;
 	}
-	return (0);
+	if (cnt == xt->pc_y)
+		return (1);
+	else
+		return (0);
+}
+
+static int	is_map(char *line)
+{
+	int		cnt;
+	char	*allowed;
+
+	cnt = 0;
+	allowed = ".XxOo";
+	while (line[cnt] != ' ')
+	{
+		if (ft_isdigit(line[cnt]))
+			cnt += 1;
+		else
+			return (0);
+	}
+	cnt += 1;
+	while (line[cnt] != '\0')
+	{
+		if (ft_strchr(allowed, line[cnt]))
+			cnt += 1;
+		else
+			return 0;
+	}
+	return (1);
 }
 
 static void	append_to_map(t_prop *xt, char *line)
@@ -106,46 +133,23 @@ void		get_map(t_prop *xt)
 	cnt = 0;
 	while(get_next_line(0, &line) > 0)
 	{
-		if (ft_strstr(line, "$$$ exec p1"))
-		{
-			if (ft_strstr(line, NAME))
-			{
-				xt->me = "Oo";
-				xt->enemy = "Xx";
-			}
-		}
-		else if (ft_strstr(line, "$$$ exec p2"))
-		{
-			if (ft_strstr(line, NAME))
-			{
-				xt->me = "Xx";
-				xt->enemy = "Oo";
-			}
-		}
-		else if (ft_strstr(line, "Plateau"))
-		{
-			temp = ft_strsplit(line, ' ');
-			xt->brd_x = ft_atoi(temp[1]);
-			xt->brd_y = ft_atoi(temp[2]);
-			free(temp); // mod it later pls
-		}
+		if (ft_strnstr(line, "$$$ exec", 8))
+			fetch_player_chars(xt, line);
+		else if (ft_strnstr(line, "Plateau", 7))
+			fetch_plateau(xt, line);
 		else if (is_map(line))
 			append_to_map(xt, line);
-		else if (ft_strstr(line, "Piece"))
-		{
-			temp = ft_strsplit(line, ' ');
-			xt->pc_x = ft_atoi(temp[1]);
-			xt->pc_y = ft_atoi(temp[2]);
-			free(temp); // mod it later pls
-		}
-		else if (ft_strlen(line) == xt->pc_y)
+		else if (ft_strnstr(line, "Piece", 5))
+			fetch_piece(xt, line);
+		else if (is_piece(xt, line))
 		{
 			append_to_piece(xt, line);
 			cnt += 1;
 			if (cnt == xt->pc_x)
 			{
-				get_heat(xt);
-				get_place_coords(xt);
+				cut_piece(xt);
+				//get_heat(xt);
+				//get_place_coords(xt);
 				cnt = 0;
 			}
 		}

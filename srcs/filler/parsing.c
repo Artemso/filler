@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 11:08:09 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/01 12:52:29 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/01 18:56:34 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	fetch_player_chars(t_prop *xt, char *line)
 	}
 }
 
-int		fetch_plateau(t_prop *xt, char *line)
+void		fetch_plateau(t_prop *xt, char *line)
 {
 	char **temp;
 	
@@ -53,7 +53,6 @@ int		fetch_plateau(t_prop *xt, char *line)
 	xt->brd_x = ft_atoi(temp[1]);
 	xt->brd_y = ft_atoi(temp[2]);
 	delete_array(temp);
-	return (1);
 }
 
 int		fetch_piece(t_prop *xt, char *line)

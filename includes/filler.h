@@ -6,11 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 13:07:36 by asolopov          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/04/01 13:17:02 by asolopov         ###   ########.fr       */
-=======
-/*   Updated: 2020/03/31 18:21:02 by asolopov         ###   ########.fr       */
->>>>>>> 4ae7a28469fbde14750f92061ebfac610397fd23
+/*   Updated: 2020/04/01 19:50:17 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +35,8 @@ typedef struct	s_prop
 	int			pc_y;
 	int			pc_cnt;
 	int			overlap;
+	int			off_x;
+	int			off_y;
 
 	int			best;
 	int			place_x;
@@ -49,8 +47,12 @@ typedef struct	s_prop
 
 
 void			get_map(t_prop *xt);
+void			fetch_player_chars(t_prop *xt, char *line);
+void			fetch_plateau(t_prop *xt, char *line);
+int				fetch_piece(t_prop *xt, char *line);
+
 void			get_heat(t_prop *xt);
-void	place_piece(t_prop *xt, int offx, int offy);
+void			place_piece(t_prop *xt, int offx, int offy);
 void			get_place_coords(t_prop *xt);
 
 void			err_exit(char *msg);

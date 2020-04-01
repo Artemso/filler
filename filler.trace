@@ -1,13 +1,1 @@
-<<<<<<< HEAD
-seed = 1600
-O: error on input
-./asolopov.filler won
-Score:
-61AGAINST78
-=======
-seed = 7159
-X: error on input
-./resources/players/superjeannot.filler won
-Score:
-5AGAINST142
->>>>>>> 4ae7a28469fbde14750f92061ebfac610397fd23
+seed = 8675
