@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/03/31 17:06:10 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/01 16:21:48 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void	append_to_map(t_prop *xt, char *line)
 {
 	if (!(xt->map))
 	{
-		xt->map = (char **)malloc(xt->brd_x * sizeof(char *));
-		xt->map[xt->brd_x] = 0;
+		xt->map = (char **)malloc((xt->brd_x + 1) * sizeof(char *));
+		xt->map[xt->brd_x + 1] = 0;
 		xt->mapcnt = 0;
 	}
 	xt->map[xt->mapcnt] = ft_strdup(line + 4);
@@ -110,13 +110,16 @@ void		get_map(t_prop *xt)
 		{
 			if (ft_strstr(line, NAME))
 			{
-				xt->me = 'O';
-				xt->enemy = 'X';
+				xt->me = "Oo";
+				xt->enemy = "Xx";
 			}
-			else
+		}
+		else if (ft_strstr(line, "$$$ exec p2"))
+		{
+			if (ft_strstr(line, NAME))
 			{
-				xt->me = 'X';
-				xt->enemy = 'O';
+				xt->me = "Xx";
+				xt->enemy = "Oo";
 			}
 		}
 		else if (ft_strstr(line, "Plateau"))
@@ -140,10 +143,11 @@ void		get_map(t_prop *xt)
 			append_to_piece(xt, line);
 			cnt += 1;
 			if (cnt == xt->pc_x)
-				{
-					get_heat(xt);
-					get_place_coords(xt);
-				}
+			{
+				get_heat(xt);
+				get_place_coords(xt);
+				cnt = 0;
+			}
 		}
 	}
 }
