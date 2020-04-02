@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/01 20:29:25 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/02 10:47:59 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ void		get_map(t_prop *xt)
 			if (cnt == xt->pc_x)
 			{
 				cut_piece(xt);
-				//get_heat(xt);
-				//get_place_coords(xt);
+				get_heat(xt);
+				get_place_coords(xt);
 				cnt = 0;
 			}
 		}
