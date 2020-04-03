@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/02 11:45:42 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/03 17:43:37 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	append_to_map(t_prop *xt, char *line)
 	if (!(xt->map))
 	{
 		xt->map = (char **)malloc((xt->brd_x + 1) * sizeof(char *));
-		xt->map[xt->brd_x + 1] = 0;
+		xt->map[xt->brd_x] = 0;
 		xt->mapcnt = 0;
 	}
 	xt->map[xt->mapcnt] = ft_strdup(line + 4);

@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 11:18:11 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/03 15:15:20 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/03 17:46:29 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	append_to_map(t_prop *xt, char *line)
 	if (!(xt->map))
 	{
 		xt->map = (char **)malloc((xt->brd_x + 1) * sizeof(char *));
-		xt->map[xt->brd_x + 1] = 0;
+		xt->map[xt->brd_x] = 0;
 		xt->mapcnt = 0;
 	}
 	xt->map[xt->mapcnt] = ft_strdup(line + 4);
@@ -124,30 +124,41 @@ static void	append_to_piece(t_prop *xt, char *line)
 	xt->pc_cnt += 1;
 }
 
+void	del_array(char **array)
+{
+	int cnt;
+	
+	cnt = 0;
+	while (array[cnt])
+	{
+		ft_strdel(&(array[cnt]));
+		cnt += 1;
+	}
+}
+
 void	get_input(t_prop *xt)
 {
 	int		cnt;
 	char	*line;
+	int 	plateau;
+	int cntx = 0;
 	
+	cnt = 0;
+	plateau = 0;
 	while(get_next_line(0, &line) > 0)
 	{
-		if (ft_strnstr(line, "$$$ exec", 8))
-			fetch_player_chars(xt, line);
-		else if (ft_strnstr(line, "Plateau", 7))
+		if (ft_strnstr(line, "Plateau", 7))
 			fetch_plateau(xt, line);
-		else if (is_map(line))
-			append_to_map(xt, line);
-		else if (ft_strnstr(line, "Piece", 5))
-			fetch_piece(xt, line);
-		else if (is_piece(xt, line))
+		if (cnt < xt->brd_x && is_map(line))
 		{
-			append_to_piece(xt, line);
+			append_to_map(xt, line);
 			cnt += 1;
-			if (cnt == xt->pc_x)
-			{
-				print_input_data(xt);
-				cnt = 0;
-			}
+		}
+		if (cnt > 0 && cnt == xt->brd_x)
+		{
+			display_all(xt);
+			cnt = 0;
 		}
 	}
+	exit(1);
 }

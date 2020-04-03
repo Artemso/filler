@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:37:54 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/03 15:15:44 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/03 17:43:57 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int 		main(void)
 
 	if (!(xt = (t_prop *)malloc(sizeof(t_prop))))
 		err_exit("t_prop xt unallocated");
+	ft_bzero(xt, sizeof(t_prop));
 	init_visu(xt);
-	// get_input(xt);
-	draw_map(xt);
+	create_images(xt);
+	get_input(xt);
 }

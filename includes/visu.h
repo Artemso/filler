@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:32:34 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/03 15:21:42 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/03 17:12:50 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,18 @@ typedef struct	s_visu
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	
-	void	*img_cell;
-	int		*cell_dat;
 
 	void	*back;
 	int		*back_dat;
+
+	void	*mycl;
+	int		*mycl_dat;
+
+	void	*encl;
+	int		*encl_dat;
+
+	void	*emptcl;
+	int		*emptcl_dat;
 }				t_visu;
 
 typedef struct	s_prop
@@ -55,6 +61,7 @@ typedef struct	s_prop
 	int			pc_cnt;
 
 	int			**heat;
+	int			pisya;
 	
 	t_visu *visu;
 }				t_prop;
@@ -68,9 +75,10 @@ void			fetch_player_chars(t_prop *xt, char *line);
 void			get_heat(t_prop *xt);
 void			err_exit(char *msg);
 
+void	create_images(t_prop *xt);
 void			fill_rctngl(int *img_data, int img_w, int img_h, int color);
 
-void			draw_map(t_prop *xt);
+void			draw_window(t_prop *xt);
 int				key_hook_press(int keycode, t_prop *xt);
 
 #endif

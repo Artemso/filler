@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 13:07:36 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/02 11:28:17 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/03 16:54:44 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void			fetch_plateau(t_prop *xt, char *line);
 int				fetch_piece(t_prop *xt, char *line);
 
 void			get_heat(t_prop *xt);
+void		cut_piece(t_prop *xt);
 void			place_piece(t_prop *xt, int offx, int offy);
 void			get_place_coords(t_prop *xt);
 
