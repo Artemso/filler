@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/30 12:28:32 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/02 11:15:03 by asolopov         ###   ########.fr       */
+/*   Created: 2020/04/02 11:30:22 by asolopov          #+#    #+#             */
+/*   Updated: 2020/04/02 11:34:25 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/filler.h"
+#include "../../includes/visu.h"
 
 static int	**map_to_heat(t_prop *xt)
 {

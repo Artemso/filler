@@ -6,7 +6,7 @@
 #    By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/24 13:21:16 by asolopov          #+#    #+#              #
-#    Updated: 2020/04/01 19:23:18 by asolopov         ###   ########.fr        #
+#    Updated: 2020/04/03 15:22:25 by asolopov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,13 @@ FILLER_FILES		= $(addprefix $(FILLER_DIR), $(FILLER_SRCS))
 
 VISU_NAME			= visu
 
-VISU_SRCS			= main.c
+VISU_SRCS			= main.c\
+					err_exit.c\
+					get_input.c\
+					parsing.c\
+					get_heat.c\
+					controls.c\
+					draw_map.c\
 
 VISU_FILES			= $(addprefix $(VISU_DIR), $(VISU_SRCS))
 

@@ -1,16 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.c                                          :+:      :+:    :+:   */
+/*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/25 10:21:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/02 11:45:42 by asolopov         ###   ########.fr       */
+/*   Created: 2020/04/02 11:18:11 by asolopov          #+#    #+#             */
+/*   Updated: 2020/04/03 15:15:20 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/filler.h"
+#include "../../includes/visu.h"
+
+static void	print_input_data(t_prop *xt)
+{
+	int cntx;
+	int	cnty;
+
+	cntx = 0;
+	printf("CHARS:		P1 chars: %s | P2 chars: %s\n", xt->me, xt->enemy);
+	printf("BOARD SIZE:	x: %d | y: %d\n", xt->brd_x, xt->brd_y);
+	printf("MAP STRINGS:\n");
+	while (xt->map[cntx])
+	{
+		if (xt->map[cntx])
+			printf("%s\n", xt->map[cntx]);
+		cntx += 1;
+	}
+	printf("\n");
+	printf("PIECE SIZE:	x: %d | y: %d\n", xt->pc_x, xt->pc_y);
+	printf("PIECE INT:\n");
+	cntx = 0;
+	while (cntx < xt->pc_x)
+	{
+		cnty = 0;
+		while (cnty < xt->pc_y)
+		{
+			printf("%d ", xt->piece[cntx][cnty]);
+			cnty += 1;
+		}
+		printf("\n");
+		cntx += 1;
+	}
+	printf("\n");
+}
 
 static int	is_piece(t_prop *xt, char *line)
 {
@@ -91,13 +124,11 @@ static void	append_to_piece(t_prop *xt, char *line)
 	xt->pc_cnt += 1;
 }
 
-void		get_map(t_prop *xt)
+void	get_input(t_prop *xt)
 {
-	char *line;
-	char **temp;
-	int cnt;
-
-	cnt = 0;
+	int		cnt;
+	char	*line;
+	
 	while(get_next_line(0, &line) > 0)
 	{
 		if (ft_strnstr(line, "$$$ exec", 8))
@@ -114,9 +145,7 @@ void		get_map(t_prop *xt)
 			cnt += 1;
 			if (cnt == xt->pc_x)
 			{
-				cut_piece(xt);
-				get_heat(xt);
-				get_place_coords(xt);
+				print_input_data(xt);
 				cnt = 0;
 			}
 		}
