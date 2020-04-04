@@ -6,7 +6,7 @@
 #    By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/24 13:21:16 by asolopov          #+#    #+#              #
-#    Updated: 2020/04/03 16:10:29 by asolopov         ###   ########.fr        #
+#    Updated: 2020/04/04 15:31:30 by asolopov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ VISU_NAME			= visu
 
 VISU_SRCS			= main.c\
 					err_exit.c\
-					get_input.c\
+					get_map.c\
 					parsing.c\
 					get_heat.c\
 					controls.c\

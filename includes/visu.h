@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:32:34 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/03 17:12:50 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/04 19:28:21 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,17 @@
 # define W_HEI	720
 # define MLX_PTR xt->visu->mlx_ptr
 # define MLX_WIN xt->visu->win_ptr
-# define C_HOT	12414214 //color: hot
-# define C_WARM	41241241 //color: warm
-# define C_COOL	12784192 //color: cool
+# define C_FREEZING	0x155263
+# define C_COOL		0xffc93c
+# define C_WARMER	0xff9a3c
+# define C_HOT		0xff6f3c
+
+# define C_BACK		0x505050
+# define C_MAPBACK	0x909090
+# define C_ME		0xFFFFFF
+# define C_ENEMY	0x000000
+# define C_MENEW	0xA1A1A1
+# define C_ENEMYNEW	0x545454
 # define NAME	"asolopov.filler"
 # define VISU	xt->visu
 
@@ -35,14 +43,27 @@ typedef struct	s_visu
 	void	*back;
 	int		*back_dat;
 
+	void	*mapback;
+	int		*mapback_dat;
+
 	void	*mycl;
 	int		*mycl_dat;
+
+	void	*mynewcl;
+	int		*mynewcl_dat;
 
 	void	*encl;
 	int		*encl_dat;
 
+	void	*enewcl;
+	int		*enewcl_dat;
+
 	void	*emptcl;
 	int		*emptcl_dat;
+
+	int		pause;
+	int		got_images;
+	int			game_finished;
 }				t_visu;
 
 typedef struct	s_prop
@@ -62,6 +83,9 @@ typedef struct	s_prop
 
 	int			**heat;
 	int			pisya;
+
+	int			score_me;
+	int			score_enemy;
 	
 	t_visu *visu;
 }				t_prop;

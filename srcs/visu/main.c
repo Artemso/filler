@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:37:54 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/03 17:43:57 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/04 19:35:45 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	init_visu(t_prop *xt)
 		err_exit("xt->t_visu unallocated");
 	MLX_PTR = mlx_init();
 	MLX_WIN = mlx_new_window(MLX_PTR, W_WID, W_HEI, "FILLEUR");
+	VISU->pause = 1;
+	VISU->got_images = 0;
 }
 
 int 		main(void)
@@ -28,6 +30,6 @@ int 		main(void)
 		err_exit("t_prop xt unallocated");
 	ft_bzero(xt, sizeof(t_prop));
 	init_visu(xt);
-	create_images(xt);
 	get_input(xt);
+	return (0);
 }
