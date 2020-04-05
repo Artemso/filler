@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 16:06:33 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/04 16:26:50 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/05 16:36:40 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,104 +37,73 @@ void	create_back(t_prop *xt)
 	fill_rctngl(VISU->back_dat, W_WID, W_HEI, C_BACK);	
 }
 
-void	create_map_back(t_prop *xt)
+int		get_map_size()
+{
+	if (W_WID > W_HEI)
+		return (W_HEI * 0.9);
+	else
+		return (W_WID * 0.7);
+}
+
+int		get_ceil_size(t_prop *xt)
+{
+	return (VISU->map_size / xt->brd_x);
+}
+
+void	add_cell(int x, int y, t_prop *xt, int color)
+{
+	int cntx;
+	int cnty;
+	int	nx;
+	int	ny;
+
+	nx = (VISU->map_size / xt->brd_x) * x;
+	ny = (VISU->map_size / xt->brd_y) * y;
+	cnty = 0;
+	while (cnty++ < VISU->ceil_size * 0.4)
+	{
+		cntx = 0;
+		while (cntx++ < VISU->ceil_size * 0.4)
+			VISU->map_dat[(ny + cnty) * VISU->map_size + (nx + cntx)] = color;
+	}
+}
+
+void	create_map(t_prop *xt)
 {
 	int		bpp;
 	int		size;
 	int		endian;
-	int		wid;
-	int 	heigh;
+	
+	int		color;
+	int		ceil_size;
 
-	wid = W_WID * 0.64;
-	heigh = W_HEI * 0.65;
-	VISU->mapback = mlx_new_image(MLX_PTR, wid, heigh);
-	VISU->mapback_dat = (int *)mlx_get_data_addr(VISU->mapback, &bpp, &size, &endian);
-	fill_rctngl(VISU->mapback_dat, wid, heigh, C_MAPBACK);	
+	int cntx;
+	int cnty;
+
+	VISU->map_size = get_map_size();
+	VISU->ceil_size = get_ceil_size(xt);
+	VISU->map = mlx_new_image(MLX_PTR, VISU->map_size, VISU->map_size);
+	VISU->map_dat = (int *)mlx_get_data_addr(VISU->map, &bpp, &size, &endian);
+	fill_rctngl(VISU->map_dat, VISU->map_size, VISU->map_size, 0xdd303030);
+	cntx = 0;
+	while (cntx < xt->brd_x)
+	{
+		cnty = 0;
+		while (cnty < xt->brd_y)
+		{
+			if (ft_strchr(xt->me, xt->map[cntx][cnty]))
+				add_cell(cntx, cnty, xt, C_ME);
+			else if (ft_strchr(xt->enemy, xt->map[cntx][cnty]))
+				add_cell(cntx, cnty, xt, C_ENEMY);
+			else
+				add_cell(cntx, cnty, xt, C_FREEZING);
+			cnty += 1;
+		}
+		cntx += 1;
+	}
 }
 
-void	create_my_cell(t_prop *xt)
-{
-	int		bpp;
-	int		size;
-	int		endian;
-	int		wid;
-	int 	heigh;
-
-	wid = W_WID / xt->brd_y * 0.6;
-	heigh = W_HEI / xt->brd_x * 0.6;
-	VISU->mycl = mlx_new_image(MLX_PTR, wid, heigh);
-	VISU->mycl_dat = (int *)mlx_get_data_addr(VISU->mycl, &bpp, &size, &endian);
-	fill_rctngl(VISU->mycl_dat, wid, heigh, C_ME);	
-}
-
-void	create_my_new_cell(t_prop *xt)
-{
-	int		bpp;
-	int		size;
-	int		endian;
-	int		wid;
-	int 	heigh;
-
-	wid = W_WID / xt->brd_y * 0.6;
-	heigh = W_HEI / xt->brd_x * 0.6;
-	VISU->mynewcl = mlx_new_image(MLX_PTR, wid, heigh);
-	VISU->mynewcl_dat = (int *)mlx_get_data_addr(VISU->mynewcl, &bpp, &size, &endian);
-	fill_rctngl(VISU->mynewcl_dat, wid, heigh, C_MENEW);	
-}
-
-void	create_empty_cell(t_prop *xt)
-{
-	int		bpp;
-	int		size;
-	int		endian;
-	int		wid;
-	int 	heigh;
-
-	wid = W_WID / xt->brd_y * 0.6;
-	heigh = W_HEI / xt->brd_x * 0.6;
-	VISU->emptcl = mlx_new_image(MLX_PTR, wid, heigh);
-	VISU->emptcl_dat = (int *)mlx_get_data_addr(VISU->emptcl, &bpp, &size, &endian);
-	fill_rctngl(VISU->emptcl_dat, wid, heigh, C_FREEZING);	
-}
-
-void	create_enemy_cell(t_prop *xt)
-{
-	int		bpp;
-	int		size;
-	int		endian;
-	int		wid;
-	int 	heigh;
-
-	wid = W_WID / xt->brd_y * 0.6;
-	heigh = W_HEI / xt->brd_x * 0.6;
-	VISU->encl = mlx_new_image(MLX_PTR, wid, heigh);
-	VISU->encl_dat = (int *)mlx_get_data_addr(VISU->encl, &bpp, &size, &endian);
-	fill_rctngl(VISU->encl_dat, wid, heigh, C_ENEMY);	
-}
-
-void	create_enemy_new_cell(t_prop *xt)
-{
-	int		bpp;
-	int		size;
-	int		endian;
-	int		wid;
-	int 	heigh;
-
-	wid = W_WID / xt->brd_y * 0.6;
-	heigh = W_HEI / xt->brd_x * 0.6;
-	VISU->enewcl = mlx_new_image(MLX_PTR, wid, heigh);
-	VISU->enewcl_dat = (int *)mlx_get_data_addr(VISU->enewcl, &bpp, &size, &endian);
-	fill_rctngl(VISU->enewcl_dat, wid, heigh, C_ENEMYNEW);	
-}
-
-void	create_images(t_prop *xt)
+void	create_imgs(t_prop *xt)
 {
 	create_back(xt);
-	create_map_back(xt);
-	create_my_cell(xt);
-	create_my_new_cell(xt);
-	create_empty_cell(xt);
-	create_enemy_cell(xt);
-	create_enemy_new_cell(xt);
-	VISU->got_images = 1;
 }

@@ -6,7 +6,7 @@
 #    By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/24 13:21:16 by asolopov          #+#    #+#              #
-#    Updated: 2020/04/04 15:31:30 by asolopov         ###   ########.fr        #
+#    Updated: 2020/04/05 14:55:31 by asolopov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,9 @@ VISU_SRCS			= main.c\
 					err_exit.c\
 					get_map.c\
 					parsing.c\
-					get_heat.c\
 					controls.c\
-					create_imgs.c\
-					draw_imgs.c\
+					display_imgs.c\
+					create_imgs.c
 
 VISU_FILES			= $(addprefix $(VISU_DIR), $(VISU_SRCS))
 

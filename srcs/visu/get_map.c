@@ -6,44 +6,11 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 11:18:11 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/04 19:36:22 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/05 16:51:05 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visu.h"
-
-static void	print_input_data(t_prop *xt)
-{
-	int cntx;
-	int	cnty;
-
-	cntx = 0;
-	printf("CHARS:		P1 chars: %s | P2 chars: %s\n", xt->me, xt->enemy);
-	printf("BOARD SIZE:	x: %d | y: %d\n", xt->brd_x, xt->brd_y);
-	printf("MAP STRINGS:\n");
-	while (xt->map[cntx])
-	{
-		if (xt->map[cntx])
-			printf("%s\n", xt->map[cntx]);
-		cntx += 1;
-	}
-	printf("\n");
-	printf("PIECE SIZE:	x: %d | y: %d\n", xt->pc_x, xt->pc_y);
-	printf("PIECE INT:\n");
-	cntx = 0;
-	while (cntx < xt->pc_x)
-	{
-		cnty = 0;
-		while (cnty < xt->pc_y)
-		{
-			printf("%d ", xt->piece[cntx][cnty]);
-			cnty += 1;
-		}
-		printf("\n");
-		cntx += 1;
-	}
-	printf("\n");
-}
 
 static int	is_piece(t_prop *xt, char *line)
 {
@@ -136,7 +103,7 @@ void	del_array(char **array)
 	}
 }
 
-void	get_input(t_prop *xt)
+void	get_map(t_prop *xt)
 {
 	int		cnt;
 	char	*line;
@@ -151,8 +118,8 @@ void	get_input(t_prop *xt)
 		if (ft_strnstr(line, "Plateau", 7))
 		{
 			fetch_plateau(xt, line);
-			if (VISU->got_images == 0)
-				create_images(xt);
+			if (VISU->imgs_created == 0)
+				create_imgs(xt);
 		}
 		if (cnt < xt->brd_x && is_map(line))
 		{
@@ -160,8 +127,12 @@ void	get_input(t_prop *xt)
 			cnt += 1;
 		}
 		if (cnt > 0 && cnt == xt->brd_x)
-			display_all(xt);
-		if (ft_strstr(line, "fin"))
-			display_finish(xt);
+		{
+			if (VISU->map)
+				mlx_destroy_image(MLX_PTR, VISU->map);
+			create_map(xt);
+			break ;
+		}
 	}
+	display_all(xt);
 }

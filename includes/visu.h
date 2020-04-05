@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/25 10:32:34 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/04 19:28:21 by asolopov         ###   ########.fr       */
+/*   Created: 2020/04/05 14:43:32 by asolopov          #+#    #+#             */
+/*   Updated: 2020/04/05 16:30:55 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define C_HOT		0xff6f3c
 
 # define C_BACK		0x505050
-# define C_MAPBACK	0x909090
+# define C_MAPBACK	0x000000
 # define C_ME		0xFFFFFF
-# define C_ENEMY	0x000000
+# define C_ENEMY	0x303030
 # define C_MENEW	0xA1A1A1
 # define C_ENEMYNEW	0x545454
 # define NAME	"asolopov.filler"
@@ -43,27 +43,17 @@ typedef struct	s_visu
 	void	*back;
 	int		*back_dat;
 
-	void	*mapback;
-	int		*mapback_dat;
+	void	*map;
+	int		*map_dat;
+	int		map_size;
 
-	void	*mycl;
-	int		*mycl_dat;
+	void	*last;
+	int		*last_dat;
 
-	void	*mynewcl;
-	int		*mynewcl_dat;
+	int		ceil_size;
 
-	void	*encl;
-	int		*encl_dat;
-
-	void	*enewcl;
-	int		*enewcl_dat;
-
-	void	*emptcl;
-	int		*emptcl_dat;
-
+	int		imgs_created;
 	int		pause;
-	int		got_images;
-	int			game_finished;
 }				t_visu;
 
 typedef struct	s_prop
@@ -82,27 +72,22 @@ typedef struct	s_prop
 	int			pc_cnt;
 
 	int			**heat;
-	int			pisya;
-
-	int			score_me;
-	int			score_enemy;
 	
 	t_visu *visu;
 }				t_prop;
 
-void			get_input(t_prop *xt);
-int				fetch_piece(t_prop *xt, char *line);
-void			fetch_plateau(t_prop *xt, char *line);
-void			fetch_player_chars(t_prop *xt, char *line);
 
+void	del_array(char **array);
+void	get_map(t_prop *xt);
+void	fetch_player_chars(t_prop *xt, char *line);
+void		fetch_plateau(t_prop *xt, char *line);
 
-void			get_heat(t_prop *xt);
-void			err_exit(char *msg);
+void	create_imgs(t_prop *xt);
 
-void	create_images(t_prop *xt);
-void			fill_rctngl(int *img_data, int img_w, int img_h, int color);
-
-void			draw_window(t_prop *xt);
+void	display_all(t_prop *xt);
 int				key_hook_press(int keycode, t_prop *xt);
+void	manual(t_prop *xt);
+
+void	err_exit(char *msg);
 
 #endif
