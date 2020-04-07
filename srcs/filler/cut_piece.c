@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 19:22:52 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/02 10:50:24 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/06 07:33:13 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void		cut_piece(t_prop *xt)
 		else
 			break ;
 	}
-	printf("X is:%d	Y is:%d\n", x, y);
 	int mlcx = xt->pc_x - x;
 	int mlcy = xt->pc_y - y;
 	xt->pc_x = mlcx;
@@ -96,7 +95,6 @@ void		cut_piece(t_prop *xt)
 	xt->off_x = x;
 	xt->off_y = y;
 	int tempy = y;
-	printf("X is:%d	Y is:%d\n", mlcx, mlcy);
 	new = (int **)malloc(mlcx * sizeof(int *));
 	while (cntx < mlcx)
 	{

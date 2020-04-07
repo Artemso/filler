@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 11:08:09 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/01 18:56:34 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/06 07:31:11 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	delete_array(char **array)
 		free(array[cnt]);
 		cnt += 1;
 	}
-	//free(array);
 }
 
 void	fetch_player_chars(t_prop *xt, char *line)

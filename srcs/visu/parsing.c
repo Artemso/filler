@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 11:25:58 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/05 16:07:55 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/05 18:36:57 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@ void		fetch_plateau(t_prop *xt, char *line)
 	xt->brd_x = ft_atoi(temp[1]);
 	xt->brd_y = ft_atoi(temp[2]);
 	delete_array(temp);
+}
+
+void	fetch_score(t_prop *xt, char *line)
+{
+	char **temp;
+	
+	temp = ft_strsplit(line, ' ');
+	if (ft_strstr(xt->me, temp[1]))
+		xt->me_score = ft_atoi(temp[3]);
+	else if(ft_strstr(xt->enemy, temp[1]))
+		xt->enemy_score = ft_atoi(temp[3]);
 }
 
 int		fetch_piece(t_prop *xt, char *line)

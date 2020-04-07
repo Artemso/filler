@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 14:43:32 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/05 16:30:55 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/06 13:23:32 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 # define W_HEI	720
 # define MLX_PTR xt->visu->mlx_ptr
 # define MLX_WIN xt->visu->win_ptr
-# define C_FREEZING	0x155263
-# define C_COOL		0xffc93c
-# define C_WARMER	0xff9a3c
-# define C_HOT		0xff6f3c
+# define C_FREEZING	0x1d3e53
+# define C_COOL		0x254b62
+# define C_WARMER	0x476d7c
+# define C_HOT		0x77abb7
 
-# define C_BACK		0x505050
-# define C_MAPBACK	0x000000
-# define C_ME		0xFFFFFF
-# define C_ENEMY	0x303030
+# define C_BACK		0x232931
+# define C_MAPBACK	0x393e46
+# define C_ME		0xfd7014
+# define C_ENEMY	0xffffff
 # define C_MENEW	0xA1A1A1
 # define C_ENEMYNEW	0x545454
 # define NAME	"asolopov.filler"
@@ -47,6 +47,9 @@ typedef struct	s_visu
 	int		*map_dat;
 	int		map_size;
 
+	void	*heat;
+	int		*heat_dat;
+
 	void	*last;
 	int		*last_dat;
 
@@ -54,6 +57,7 @@ typedef struct	s_visu
 
 	int		imgs_created;
 	int		pause;
+	int		disp_heat;
 }				t_visu;
 
 typedef struct	s_prop
@@ -72,7 +76,10 @@ typedef struct	s_prop
 	int			pc_cnt;
 
 	int			**heat;
+	int			heat_max;
 	
+	int			me_score;
+	int			enemy_score;
 	t_visu *visu;
 }				t_prop;
 

@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 11:18:11 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/05 16:51:05 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/06 12:58:27 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,13 @@ void	get_map(t_prop *xt)
 		{
 			if (VISU->map)
 				mlx_destroy_image(MLX_PTR, VISU->map);
+			get_heat(xt);
 			create_map(xt);
+			create_heat(xt);
 			break ;
 		}
+		if (ft_strnstr(line, "==", 3))
+			fetch_score(xt, line);
 	}
 	display_all(xt);
 }

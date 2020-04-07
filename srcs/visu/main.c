@@ -6,7 +6,7 @@
 /*   By: asolopov <asolopov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 10:37:54 by asolopov          #+#    #+#             */
-/*   Updated: 2020/04/05 14:59:03 by asolopov         ###   ########.fr       */
+/*   Updated: 2020/04/06 13:08:27 by asolopov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int 		main(void)
 		err_exit("t_prop xt unallocated");
 	ft_bzero(xt, sizeof(t_prop));
 	init_visu(xt);
+	VISU->disp_heat = 1;
 	get_map(xt);
 	return (0);
 }
